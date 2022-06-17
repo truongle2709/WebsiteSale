@@ -1,0 +1,188 @@
+﻿@model PagedList.IPagedList<WebApplication1.Models.Product>
+    @using PagedList.Mvc; 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "DanhSachSanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+                </ul>
+            </div>
+
+            <!-- Sidebar -->
+
+            <div class="sidebar">
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>Product Category</h5>
+                    </div>
+                   @Html.Action("CategoryMenu","SanPham")
+                </div>
+
+                <!-- Price Range Filtering -->
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>Filter by Price</h5>
+                    </div>
+                    @using (Html.BeginForm("DanhSachSanPham","SanPham", FormMethod.Get))
+                    {
+                        <div class="row">
+                            <div class="col">
+                                @Html.TextBox("min", ViewBag.FilterValue as string,new {@class= "form-control", @placeholder = "Min Price" })
+                                @*<input type="text" name="min" class="form-control" placeholder="Min Price">*@
+                            </div>
+                            <br />
+                            <div class="col">
+                                @Html.TextBox("max", ViewBag.FilterValue as string, new { @class = "form-control", @placeholder = "Max Price" })
+                                @*<input type="text" name="max" class="form-control" placeholder="Max Price">*@
+                            </div>
+                            <br />
+
+                            <button type="submit" class="filter_button" style="background-color:red">filter</button>
+                        </div>
+                    }
+
+
+                </div>
+
+                <!-- Sizes -->
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>Sizes</h5>
+                    </div>
+                    <ul class="checkboxes">
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
+                        <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
+                    </ul>
+                </div>
+
+                <!-- Color -->
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>Color</h5>
+                    </div>
+                    <ul class="checkboxes">
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
+                        <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                    </ul>
+                    <div class="show_more">
+                        <span><span>+</span>Show More</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Main Content -->
+
+            <div class="main_content">
+
+                <!-- Products -->
+
+                <div class="products_iso">
+                    <div class="row">
+                        <div class="col">
+
+                            <!-- Product Sorting -->
+
+                            <div class="product_sorting_container product_sorting_container_top">
+                                <ul class="product_sorting">
+                                    <li>
+                                        <span class="type_sorting_text"></span>
+                                        <i class="fa fa-angle-down"></i>
+                                        <ul class="sorting_type">
+                                           
+                                            <li class="type_sorting_btn"><span>@Html.ActionLink("Product Name", "DanhSachSanPham", new { sortOrder = ViewBag.NameSortParm})</span></li>
+                                            <li class="type_sorting_btn"><span>@Html.ActionLink("Price", "DanhSachSanPham", new { sortOrder = ViewBag.PriceSortParm})</span></li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                                <div class="pages d-flex flex-row align-items-center">
+                                    <div class="page_current">
+                                        <span>@Model.PageNumber</span>
+                                        
+                                    </div>
+                                    <div class="page_total"><span>of</span> @Model.PageCount</div>
+                                    <div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                </div>
+
+                            </div>
+
+                            <!-- Product Grid -->
+
+                            <div class="product-grid">
+
+                                <!-- Product 1 -->
+
+                                @foreach (var item in Model)
+                                {
+                                    <div class="product-item men">
+                                        <div class="product discount product_filter">
+                                            <div class="product_image">
+                                                <img src="~/Asset/images/@item.Image" alt="">
+                                            </div>
+                                            <div class="favorite favorite_left"></div>
+                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                            <div class="product_info">
+                                                <h6 class="product_name"><a href="@Url.Action("ChiTietSanPham","SanPham", new {@id = item.Id} , null)">@item.Productname</a></h6>
+                                                <div class="product_price">$@item.Price<span>$590.00</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="red_button add_to_cart_button" style="margin-left: auto; margin-right: auto; display: block"><a href="/ShoppingCart/Add/@item.Id">add to cart</a></div>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <!-- Product Sorting -->
+
+                            <div class="product_sorting_container product_sorting_container_bottom clearfix">
+
+                               
+                                <div class="pages d-flex flex-row align-items-center">
+                                    @{ 
+                                        int txtMin=  ViewBag.Min;
+                                        int txtMax = ViewBag.Max;
+                                      
+                                    }
+                                    <div id="next_page_1" class="page_next">
+                                        @Html.PagedListPager(Model, page => Url.Action("DanhSachSanPham",new { page,
+                                       @ViewBag.CurentSorr }))
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

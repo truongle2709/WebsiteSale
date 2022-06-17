@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WebApplication1.Models.Category>
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "_Category";
+
+}
+
+<ul class="sidebar_categories">
+    @foreach (var item in Model)
+    {
+        <li><a href="/SanPham/ProductCategory?categoryID=@item.Id">@item.Name</a></li>
+
+    }
+</ul>
+
+

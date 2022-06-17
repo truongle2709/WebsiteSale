@@ -1,0 +1,20 @@
+﻿@using WebApplication1.Common;
+@{
+    var a = (UserLogin)Session[WebApplication1.Common.UserSession.User_Session];
+}
+
+@if (a == null)
+{
+    <li><a href="@Url.Action("Login","Account")"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+}
+else
+{
+<li>
+    
+    <p>Xin chào: @a.UserName</p>
+</li>
+    <li>
+        @Html.ActionLink("Logout","Logout","Account")
+    </li>
+}
+

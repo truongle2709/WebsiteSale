@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="60ffb7a6b3414bc8b45601727334e1fd" Name="Diagram1">
+        <EntityTypeShape EntityType="Colorshop2Model.Account" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Colorshop2Model.Cart" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Colorshop2Model.Category" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Colorshop2Model.InvoiceDetail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Colorshop2Model.Invoice" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Colorshop2Model.Product" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="Colorshop2Model.FK_Carts_Accounts_AccountId" ManuallyRouted="false" />
+        <AssociationConnector Association="Colorshop2Model.FK_Carts_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Colorshop2Model.FK_Products_ProductTypes_ProductTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="Colorshop2Model.FK_InvoiceDetails_Invoices_InvoiceId" ManuallyRouted="false" />
+        <AssociationConnector Association="Colorshop2Model.FK_InvoiceDetails_Products_ProductId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

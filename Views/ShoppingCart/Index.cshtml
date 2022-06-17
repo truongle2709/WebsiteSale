@@ -1,0 +1,58 @@
+﻿@using WebApplication1.Helper;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cart = WebApplication1.Models.ShoppingCart.Cart;
+}
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Hình</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Cart.Items)
+        {
+
+
+            <tr>
+
+                <td class="text-center" style="width:30px; height:30px "><img style="width:30px; height:30px " src="~/Asset/images/@item.Image" /></td>
+                <td><a target="_blank" href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.Id })"></a>@item.Productname</td>
+
+                
+                <td>@Html.TextBox(item.Id.ToString(),item.Quantity)</td>
+                <td>@Html.FormatValue(item.Price, "{0:c}")</td>
+                <td>@Html.FormatValue(item.Price * item.Quantity, "{0:c}")</td>
+                <th>
+                    <a href="/ShoppingCart/Delete/@item.Id">
+                        Xóa
+                    </a>
+                </th>
+            </tr>
+        }
+  
+    </table>
+
+    <div>
+       
+        @Html.Submit("Cập nhật", "/ShoppingCart/Update")
+        @Html.Submit("Xóa tất cả sản phẩm", "/ShoppingCart/Clear")
+        @Html.Submit("Tiếp tục mua sắm","/SanPham/Index")
+        <a href="/HoaDon/Checkout" class="btn btn-default">Thanh Toán</a>
+        
+    </div>
+}
+
+
+
+
+
+
+
+
